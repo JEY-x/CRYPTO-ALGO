@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: cryptobot-pro
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        value: changeme123
+      - key: DATA_DIR
+        value: /tmp
+      - key: BINANCE_API_KEY
+        value: ""
+      - key: BINANCE_API_SECRET
+        value: ""
